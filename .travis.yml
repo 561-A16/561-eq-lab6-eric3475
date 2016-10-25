@@ -1,0 +1,16 @@
+branches:
+  only:
+    - master
+
+  cache:
+    directories:
+      -$HOME/cache
+
+  sudo: required
+
+  services:
+    - docker
+
+  script:
+    - docker build -t webapp:test -f .
+    - docker run -it --rm -v $PWD/packages:/root/.nuget/packages webapp:test
