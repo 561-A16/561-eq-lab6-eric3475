@@ -2,9 +2,12 @@
 # Dockerfile
 ############################################################
 FROM ymazieres/dotnet:compile
-WORKDIR /src
+
 ENV ASPNETCORE_URLS http://+:5000
+
 EXPOSE 5000
-COPY src /src/
-RUN dotnet restore
-ENTRYPOINT ["dotnet", "run"]
+CMD ["sh", "../script/run.sh"]
+COPY /script/run.sh ../script/run.sh
+RUN chmod +x ../script/run.sh
+COPY /src /src/
+WORKDIR /src/webapp.unittests
